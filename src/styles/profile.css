@@ -1,0 +1,72 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.profile-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.upi-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
+  color: white;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.logout-btn:hover {
+  background-color: #e53935;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255,77,79,0.45);
+}
+
+.edit-btn {
+  background-color: #091c3a;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background-color: #0d2a5a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(9,28,58,0.45);
+}

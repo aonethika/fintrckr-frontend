@@ -1,0 +1,232 @@
+.personal-transactions {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- FORM STYLING ---------- */
+.transaction-form {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 900px;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1.2fr auto;
+  gap: 12px;
+  background: white;
+  padding: 14px 16px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.transaction-form input,
+.transaction-form select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #f9fafb;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus {
+  outline: none;
+  background: white;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.transaction-form button {
+  height: 42px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.transaction-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+/* ---------- TRANSACTION GRID ---------- */
+.transaction-grid {
+  margin-top: 140px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ---------- TRANSACTION TILE ---------- */
+.transaction-tile {
+  background: #d5d5e1;
+  border-radius: 14px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.transaction-tile:hover {
+  border-color: #1f2438;
+  transform: translateY(-5px);
+}
+
+.transaction-compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.transaction-amount {
+  font-size: 15px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.transaction-amount.expense {
+  color: #16a34a;
+}
+
+/* ---------- DETAILS PANEL ---------- */
+.transaction-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #d1d5db;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-details span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.transaction-details img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.transaction-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.transaction-actions button {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.transaction-actions button:first-child {
+  background: #3b82f6;
+  color: white;
+}
+
+.transaction-actions button:last-child {
+  background: #ef4444;
+  color: white;
+}
+
+/* ---------- EMPTY STATE ---------- */
+.transaction-grid p {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 30px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .personal-transactions {
+    padding: 12px;
+  }
+
+  .transaction-form {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    border-radius: 0;
+  }
+
+  .transaction-form button {
+    width: 80%;
+  }
+
+  .transaction-grid {
+    margin-top: 310px;
+  }
+
+  .transaction-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .transaction-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .transaction-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .transaction-form button {
+    grid-column: span 2;
+  }
+
+  .transaction-grid {
+    margin-top: 150px;
+  }
+
+  .transaction-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .transaction-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .transaction-form {
+    grid-template-columns: 2fr 1fr 1fr auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .transaction-form {
+    grid-template-columns: 2fr 1fr 1.2fr 1.2fr auto;
+  }
+}
