@@ -7,6 +7,8 @@ import {
   removeCategoryBudget,
 } from "../redux/slices/monthlySummarySlice";
 
+import "../styles/setBudget.css";
+
 function SetBudget() {
   const dispatch = useDispatch();
 
@@ -135,11 +137,14 @@ function SetBudget() {
     dispatch(fetchMonthlySummary(selectedMonth));
   };
 
-  return (
-    <div className="set-budget-page">
-      <h2>Set Monthly Budget</h2>
+ return (
+  <div className="set-budget-wrapper">
+    <div className="set-budget-container">
+
+      <h2 className="page-title">Monthly Budget</h2>
 
       <input
+        className="month-input"
         type="month"
         value={selectedMonth}
         onChange={(e) => setSelectedMonth(e.target.value)}
@@ -148,20 +153,21 @@ function SetBudget() {
       <div className="total-budget">
         {!editingMonth ? (
           <>
-            <p>
-              Current budget:{" "}
+            <p className="budget-display">
+              Budget:
               {monthlyBudget ? (
-                <strong>₹{monthlyBudget}</strong>
+                <span className="budget-value"> ₹{monthlyBudget}</span>
               ) : (
-                "Not set"
+                <span className="budget-empty"> Not set</span>
               )}
             </p>
+
             <button onClick={() => setEditingMonth(true)}>
-              {monthlyBudget ? "Edit Budget" : "Set Budget"}
+              {monthlyBudget ? "Edit" : "Set"}
             </button>
           </>
         ) : (
-          <>
+          <div className="budget-edit">
             <input
               type="number"
               value={monthlyInput}
@@ -170,14 +176,17 @@ function SetBudget() {
             <button onClick={handleSaveMonth}>
               {status === "loading" ? "Saving..." : "Save"}
             </button>
-            <button onClick={() => setEditingMonth(false)}>
+            <button
+              className="secondary-btn"
+              onClick={() => setEditingMonth(false)}
+            >
               Cancel
             </button>
-          </>
+          </div>
         )}
       </div>
 
-      <h3>Category Budget</h3>
+      <h3 className="section-title">Category Budget</h3>
 
       <div className="category-selector">
         <select
@@ -194,9 +203,7 @@ function SetBudget() {
         >
           <option value="">Select Category</option>
           {categories.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
+            <option key={c} value={c}>{c}</option>
           ))}
           <option value="__new__">+ Add new category</option>
         </select>
@@ -214,65 +221,66 @@ function SetBudget() {
 
             <input
               type="number"
-              placeholder="Enter budget"
+              placeholder="Budget amount"
               value={categoryAmount}
               onChange={(e) => setCategoryAmount(e.target.value)}
             />
 
-            <button onClick={handleSaveCategory}>
-              {status === "loading" ? "Saving..." : "Save"}
-            </button>
+            <button onClick={handleSaveCategory}>Save</button>
           </>
         )}
       </div>
 
       {error && <p className="error-message">{error}</p>}
 
-      // ------------------- Display Saved Category Budgets -------------------
-<div className="saved-category-list">
-  <h4>Saved Category Budgets</h4>
+      <div className="saved-category-list">
+        {categoryBudgets?.[selectedMonth] &&
+        Object.keys(categoryBudgets[selectedMonth]).length > 0 ? (
+          Object.entries(categoryBudgets[selectedMonth]).map(
+            ([cat, amt]) => {
+              const budget = amt ?? null;
+              const spent = user?.categorySpent?.[cat] || 0;
 
-  {categoryBudgets?.[selectedMonth] &&
-  Object.keys(categoryBudgets[selectedMonth]).length > 0 ? (
-    <ul>
-      {Object.entries(categoryBudgets[selectedMonth]).map(
-        ([cat, amt]) => {
-          // Treat missing budgets as null
-          const budget = amt ?? null;
+              const exceeded =
+                budget !== null && budget > 0 && spent > budget;
 
-          // Replace this with your actual spent calculation per category
-          const spent = user?.categorySpent?.[cat] || 0;
+              return (
+                <div
+                  key={cat}
+                  className={`category-row ${
+                    exceeded ? "exceeded" : ""
+                  }`}
+                >
+                  <div className="cat-left">
+                    <span className="cat-name">{cat}</span>
 
-          // Only show exceeded if budget exists and is >0
-          const exceeded =
-            budget !== null && budget > 0 && spent > budget
-              ? spent - budget
-              : null;
+                    <span className="spent">
+                      Spent ₹{spent}
+                    </span>
 
-          return (
-            <li key={cat}>
-              {cat} — Spent: ₹{spent} | Budget:{" "}
-              {budget !== null && budget > 0 ? `₹${budget}` : "Not set"}
-              {exceeded !== null && (
-                <span style={{ color: "red" }}>
-                  {" "}
-                  | Category {cat} exceeded budget by ₹{exceeded}
-                </span>
-              )}
-              <button onClick={() => handleDeleteCategoryBudget(cat)}>
-                Delete
-              </button>
-            </li>
-          );
-        }
-      )}
-    </ul>
-  ) : (
-    <p>No category budgets set</p>
-  )}
-</div>
+                    <span className="budget">
+                      Budget {budget ? `₹${budget}` : "Not set"}
+                    </span>
+                  </div>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDeleteCategoryBudget(cat)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              );
+            }
+          )
+        ) : (
+          <p className="empty-text">No category budgets</p>
+        )}
+      </div>
+
     </div>
-  );
+  </div>
+);
 }
 
 export default SetBudget;

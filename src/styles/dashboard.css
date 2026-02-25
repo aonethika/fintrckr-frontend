@@ -177,6 +177,7 @@
 }
 .set-budget-btn{
   border: 1px solid #0f2a44;
+  background-color: white;
   color: #0f2a44;
   animation: pulseBtn 1.6s ease-in-out infinite;
 }
@@ -320,3 +321,4 @@
     font-size: 20px;
   }
 }
+
