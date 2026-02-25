@@ -14,7 +14,7 @@ function GroupPage() {
 
   const group = useSelector(state => state.groups.currentGroup);
   const currentUser = useSelector(state => state.auth.user);
-  console.log("status",group.name, group.status);
+  // console.log("status",group.name, group.status);
   
 
   const [openInfo, setOpenInfo] = useState(false);

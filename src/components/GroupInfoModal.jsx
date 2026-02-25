@@ -15,6 +15,10 @@ function GroupInfoModal({ group, onClose }) {
 
   const currentUser = useSelector((state) => state.auth.user);
   const isAdmin = group.admin?._id === currentUser?.id;
+  console.log("group", group);
+  
+  console.log("isadmin", isAdmin);
+  
 
   const [member, setMember] = useState('');
   const [showAddMember, setShowAddMember] = useState(false);
@@ -58,7 +62,7 @@ function GroupInfoModal({ group, onClose }) {
     try {
       await dispatch(deleteGroup(group._id)).unwrap();
       onClose();
-      navigate('/groups');
+      navigate('/group');
     } catch (err) {
       console.error('Delete failed', err);
     }
