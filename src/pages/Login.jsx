@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { loginAPI } from "../api/api";
 import { loginSuccess } from "../redux/slices/authSlice";
-// import "../style/auth.css";
+import "../styles/auth.css";
 
 function Login() {
   const dispatch = useDispatch();
